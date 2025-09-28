@@ -2,15 +2,14 @@ pipeline {
     agent any
 
     environment {
-        // DockerHub credentials stored in Jenkins (Manage Jenkins -> Credentials)
         DOCKERHUB_CREDENTIALS = credentials('dockerhub-credentials-id')
-        DOCKERHUB_REPO = 'your-dockerhub-username/scientific-calculator'
+        DOCKERHUB_REPO = 'harsh4710/scientific-calculator'
     }
 
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/your-username/your-repo.git'
+                git branch: 'main', url: 'https://github.com/harsh4710/MINI_PROJECT.git'
             }
         }
 
@@ -39,14 +38,7 @@ pipeline {
             }
         }
 
-        stage('Deploy with Ansible') {
-            steps {
-                script {
-                    // Make sure ansible is installed on Jenkins server
-                    sh "ansible-playbook -i ansible/inventory ansible/deploy.yml --extra-vars 'docker_image=${DOCKERHUB_REPO}:${BUILD_NUMBER}'"
-                }
-            }
-        }
+        // Stage for Ansible can be added later
     }
 
     post {
