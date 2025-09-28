@@ -9,18 +9,21 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/harsh4710/MINI_PROJECT.git'
+                git branch: 'main',
+                    url: 'https://github.com/harsh4710/MINI_PROJECT.git',
+                    credentialsId: 'github-credentials-id' // <- Use the ID of your GitHub PAT credential
             }
         }
 
         stage('Build & Test') {
             steps {
-                sh 'mvn clean package'
+                sh 'mvn clean package -DskipTests=false'
             }
         }
 
         stage('Build Docker Image') {
             steps {
+                echo "Building Docker image..."
                 script {
                     sh "docker build -t ${DOCKERHUB_REPO}:${BUILD_NUMBER} ."
                 }
@@ -29,6 +32,7 @@ pipeline {
 
         stage('Push to DockerHub') {
             steps {
+                echo "Logging in and pushing Docker image..."
                 script {
                     sh "echo ${DOCKERHUB_CREDENTIALS_PSW} | docker login -u ${DOCKERHUB_CREDENTIALS_USR} --password-stdin"
                     sh "docker push ${DOCKERHUB_REPO}:${BUILD_NUMBER}"
