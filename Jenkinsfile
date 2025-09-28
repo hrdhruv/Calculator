@@ -10,7 +10,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 git branch: 'main',
-                    url: 'https://github.com/harsh4710/MINI_PROJECT.git',
+                    url: 'https://github.com/hrdhruv/Calculator.git',
                     credentialsId: 'github-credentials-id' // <- Use the ID of your GitHub PAT credential
             }
         }
