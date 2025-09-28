@@ -13,5 +13,5 @@ RUN mvn clean package -DskipTests
 # ---------------------------
 FROM eclipse-temurin:21-jdk-alpine
 WORKDIR /app
-COPY --from=build /app/target/*.jar app.jar
-ENTRYPOINT ["java", "-cp", "app.jar", "Calculator"]
+COPY --from=build /app/target/miniproject-1.0-SNAPSHOT.jar app.jar
+ENTRYPOINT ["java", "-jar", "app.jar"]
