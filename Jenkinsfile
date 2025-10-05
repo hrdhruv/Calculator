@@ -10,7 +10,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 echo "📦 Checking out repository..."
-                git branch: 'main', url: 'https://github.com/harsh4710/MINI_PROJECT.git'
+                git branch: 'main', url: 'https://github.com/hrdhruv/Calculator.git'
             }
         }
 
