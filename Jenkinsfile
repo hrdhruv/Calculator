@@ -46,9 +46,9 @@ pipeline {
             steps {
                 echo "🚀 Deploying container using Ansible..."
                 script {
-                    sh '''
-                        ansible-playbook -i ansible/inventory.ini ansible/playbook.yml
-                    '''
+                    sh "
+                        ansible-playbook -i inventory.ini playbook.yml
+                    "
                 }
             }
         }
