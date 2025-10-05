@@ -59,7 +59,7 @@ pipeline {
             echo "✅ Build ${BUILD_NUMBER} completed successfully!"
         }
         failure {
-            echo "❌ Build ${BUILD_NUMBER} failed!"
+            echo " Build ${BUILD_NUMBER} failed!"
         }
     }
 }
