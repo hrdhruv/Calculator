@@ -4,7 +4,7 @@ pipeline {
     environment {
         DOCKERHUB_CREDENTIALS = credentials('dockerhub-credentials-id')
         DOCKERHUB_REPO = 'harsh4710/scientific-calculator'
-        NOTIFY_EMAIL = 'Harshdhruv889@gmail.com'   // 🔔 Change this to your email
+        NOTIFY_EMAIL = 'Harshdhruv889@gmail.com'   
     }
 
     stages {
