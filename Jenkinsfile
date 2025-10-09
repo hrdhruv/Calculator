@@ -10,21 +10,21 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                echo "📦 Checking out repository..."
+                echo "Checking out repository..."
                 git branch: 'main', url: 'https://github.com/hrdhruv/Calculator'
             }
         }
 
         stage('Build & Test') {
             steps {
-                echo "🧪 Building and testing application..."
+                echo "Building and testing application..."
                 sh 'mvn clean package'
             }
         }
 
         stage('Build Docker Image') {
             steps {
-                echo "🐳 Building Docker image..."
+                echo "Building Docker image..."
                 script {
                     sh "docker build -t ${DOCKERHUB_REPO}:${BUILD_NUMBER} ."
                 }
@@ -33,7 +33,7 @@ pipeline {
 
         stage('Push to DockerHub') {
             steps {
-                echo "📤 Pushing image to DockerHub..."
+                echo "Pushing image to DockerHub..."
                 script {
                     sh "echo ${DOCKERHUB_CREDENTIALS_PSW} | docker login -u ${DOCKERHUB_CREDENTIALS_USR} --password-stdin"
                     sh "docker push ${DOCKERHUB_REPO}:${BUILD_NUMBER}"
@@ -45,7 +45,7 @@ pipeline {
 
         stage('Deploy with Ansible') {
             steps {
-                echo "🚀 Deploying container using Ansible..."
+                echo "Deploying container using Ansible..."
                 script {
                     sh "ansible-playbook -i inventory.ini playbook.yml"
                 }
@@ -55,10 +55,10 @@ pipeline {
 
     post {
         success {
-            echo "✅ Build ${BUILD_NUMBER} completed successfully!"
+            echo "Build ${BUILD_NUMBER} completed successfully!"
             mail to: "${NOTIFY_EMAIL}",
-                 subject: "✅ SUCCESS: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-                 body: """Build SUCCESSFUL 🎉
+                 subject: "SUCCESS: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                 body: """Build SUCCESSFUL 
 
 Project: ${env.JOB_NAME}
 Build Number: ${env.BUILD_NUMBER}
@@ -68,10 +68,10 @@ Check details at: ${env.BUILD_URL}
 """
         }
         failure {
-            echo "❌ Build ${BUILD_NUMBER} failed!"
+            echo "Build ${BUILD_NUMBER} failed!"
             mail to: "${NOTIFY_EMAIL}",
-                 subject: "❌ FAILURE: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-                 body: """Build FAILED 💥
+                 subject: "FAILURE: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                 body: """Build FAILED 
 
 Project: ${env.JOB_NAME}
 Build Number: ${env.BUILD_NUMBER}
@@ -81,10 +81,10 @@ Check console output: ${env.BUILD_URL}console
 """
         }
         unstable {
-            echo "⚠️ Build ${BUILD_NUMBER} is unstable!"
+            echo " Build ${BUILD_NUMBER} is unstable!"
             mail to: "${NOTIFY_EMAIL}",
-                 subject: "⚠️ UNSTABLE: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-                 body: """Build UNSTABLE ⚠️
+                 subject: " UNSTABLE: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                 body: """Build UNSTABLE 
 
 Project: ${env.JOB_NAME}
 Build Number: ${env.BUILD_NUMBER}
