@@ -2,7 +2,7 @@ import java.math.BigInteger;
 import java.util.Scanner;
 
 public class Calculator {
-    // Square root hellooooo
+    // Square root testing purpose
     public double sqrt(double x) {
         if (x < 0) throw new IllegalArgumentException("sqrt: negative input");
         return Math.sqrt(x);
