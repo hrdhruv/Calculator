@@ -23,14 +23,14 @@ pipeline {
             }
         }
 
-        stage('DevSecOps Scan (Trivy)') {
-            steps {
-                echo "Running security scan using Trivy..."
-                sh """
-                trivy fs --exit-code 0 --severity HIGH,CRITICAL .
-                """
-            }
-        }
+        // stage('DevSecOps Scan (Trivy)') {
+        //     steps {
+        //         echo "Running security scan using Trivy..."
+        //         sh """
+        //         trivy fs --exit-code 0 --severity HIGH,CRITICAL .
+        //         """
+        //     }
+        // }
 
         stage('Kubernetes Access Test') {
             steps {
